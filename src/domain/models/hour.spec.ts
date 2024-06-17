@@ -46,4 +46,52 @@ describe('Hour', () => {
       days: [1, 2, 3, 4, 5, 6, 7]
     })).toThrow();
   });
+
+  it('should throw an error when creating a new hour with invalid start', () => {
+    expect(() => Hour.create({
+      start: "08:75",
+      end: "18:00",
+      days: [1, 2, 3, 4, 5]
+    })).toThrow();
+  });
+
+  it('should throw an error when creating a new hour with invalid end', () => {
+    expect(() => Hour.create({
+      start: "08:00",
+      end: "18:75",
+      days: [1, 2, 3, 4, 5]
+    })).toThrow();
+  });
+
+  it('should throw an error when creating a new hour with invalid start pattern', () => {
+    expect(() => Hour.create({
+      start: "8hrs",
+      end: "18:00",
+      days: [1, 2, 3, 4, 5]
+    })).toThrow();
+  });
+
+  it('should throw an error when creating a new hour with invalid end pattern', () => {
+    expect(() => Hour.create({
+      start: "08:00",
+      end: "18hrs",
+      days: [1, 2, 3, 4, 5]
+    })).toThrow();
+  });
+
+  it('should throw an error when creating a new hour with invalid start interval', () => {
+    expect(() => Hour.create({
+      start: "08:27",
+      end: "18:00",
+      days: [1, 2, 3, 4, 5]
+    })).toThrow();
+  });
+
+  it('should throw an error when creating a new hour with invalid end interval', () => {
+    expect(() => Hour.create({
+      start: "08:00",
+      end: "18:27",
+      days: [1, 2, 3, 4, 5]
+    })).toThrow();
+  });
 });
