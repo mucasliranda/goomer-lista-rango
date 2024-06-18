@@ -1,3 +1,6 @@
+import restaurantsRouter from '../../interfaces/controllers/restaurants';
+import productsRouter from '../../interfaces/controllers/products';
+import salesRouter from '../../interfaces/controllers/sales';
 import imageRouter from '../../interfaces/controllers/image';
 import { setupDatabase } from '../database/setup';
 import bodyParser from 'body-parser';
@@ -9,6 +12,12 @@ dotenv.config();
 const app = express();
 
 app.use(bodyParser.json());
+
+app.use('/restaurants', restaurantsRouter);
+
+app.use('/products', productsRouter);
+
+app.use('/sales', salesRouter);
 
 app.use('/image', imageRouter);
 
