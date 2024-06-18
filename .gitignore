@@ -131,3 +131,5 @@ dist
 
 public/images-database/*
 !public/images-database/.gitkeep
+
+/database
