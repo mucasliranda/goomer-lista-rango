@@ -20,6 +20,8 @@ interface Input {
   };
 }
 
+const localUrl = 'http://localhost:3000';
+
 export class Product {
   constructor(
     readonly id: string,
@@ -27,7 +29,8 @@ export class Product {
     readonly name: string,
     readonly price: number,
     readonly category: string,
-    readonly sale: Sale | null
+    readonly sale: Sale | null,
+    readonly image?: string,
   ) {
     if (!this.id) throw new ValidationError('Product id is required');
     if (!this.restaurantId) throw new ValidationError('Product restaurantId is required');
@@ -43,7 +46,8 @@ export class Product {
       name,
       price,
       category,
-      sale ? Sale.create(sale) : null
+      sale ? Sale.create(sale) : null,
+      `${localUrl}/image/${id}`
     );
   }
 }
