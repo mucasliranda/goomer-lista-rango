@@ -1,16 +1,18 @@
 import { describe } from "node:test";
-import { beforeAll, expect, it } from "vitest";
+import { beforeEach, expect, it } from "vitest";
 import Hour from "../../../domain/models/hour";
 import CreateRestaurant from "./createRestaurant";
 import { DatabaseRestaurantRepository } from "../../../domain/repositories/restaurantRepository/databaseRestaurantRepository";
-import { setupDatabase } from "../../../infraestructure/database/setup";
+import { setupDatabase, truncateDatabase } from "../../../infraestructure/database/setup";
 import Restaurant from "../../../domain/models/restaurant";
 import GetRestaurant from "./getRestaurant";
+import UpdateRestaurant from "./updateRestaurant";
 
 describe('Update Restaurant Use Case', () => {
   const databaseRestaurantRepository = new DatabaseRestaurantRepository();
   const createRestaurant = new CreateRestaurant(databaseRestaurantRepository);
   const getRestaurant = new GetRestaurant(databaseRestaurantRepository);
+  const updateRestaurant = new UpdateRestaurant(databaseRestaurantRepository);
   
   const restaurantData = {
     id: "1",
@@ -30,8 +32,10 @@ describe('Update Restaurant Use Case', () => {
     ]
   }
 
-  beforeAll(async () => {
+  beforeEach(async () => {
     await setupDatabase();
+
+    await truncateDatabase();
 
     await createRestaurant.execute(Restaurant.create(restaurantData));
   });
@@ -43,7 +47,7 @@ describe('Update Restaurant Use Case', () => {
       address: "Endereço do Restaurante Atualizado",
     });
 
-    await databaseRestaurantRepository.update(restaurant);
+    await updateRestaurant.execute(restaurant);
 
     const updatedRestaurant = await getRestaurant.execute("1");
 

@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/infraestructure/web/server.ts",
-    "test": "vitest",
-    "test:coverage": "vitest --coverage"
+    "test": "set NODE_ENV=test && vitest",
+    "test:coverage": "set NODE_ENV=test && vitest --coverage"
   },
   "keywords": [],
   "author": "",

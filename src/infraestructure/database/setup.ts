@@ -51,8 +51,8 @@ export async function setupDatabase() {
       sale_id VARCHAR(255) REFERENCES sales(id) ON DELETE CASCADE
     )
   `);
+}
 
-  await db.query(`
-    TRUNCATE TABLE restaurants CASCADE;
-  `)
+export async function truncateDatabase() {
+  await db.query('TRUNCATE TABLE restaurants CASCADE');
 }

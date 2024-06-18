@@ -1,7 +1,7 @@
 import { DatabaseRestaurantRepository } from "../../../domain/repositories/restaurantRepository/databaseRestaurantRepository";
 import { DatabaseProductRepository } from "../../../domain/repositories/productRepository/databaseProductRepository";
 import { DatabaseSaleRepository } from "../../../domain/repositories/saleRepository/databaseSaleRepository";
-import { setupDatabase } from "../../../infraestructure/database/setup";
+import { setupDatabase, truncateDatabase } from "../../../infraestructure/database/setup";
 import CreateRestaurant from "../restaurants/createRestaurant";
 import Restaurant from "../../../domain/models/restaurant";
 import { beforeEach, describe, expect, it } from "vitest";
@@ -54,6 +54,8 @@ describe("Delete Sale", () => {
 
   beforeEach(async () => {
     await setupDatabase();
+
+    await truncateDatabase();
 
     await createRestaurant.execute(Restaurant.create(restaurantData));
     await createProduct.execute(Product.create(productData));

@@ -1,7 +1,7 @@
 import { DatabaseRestaurantRepository } from "../../../domain/repositories/restaurantRepository/databaseRestaurantRepository";
-import { beforeAll, describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it } from "vitest";
 import GetRestaurants from "./getRestaurants";
-import { setupDatabase } from "../../../infraestructure/database/setup";
+import { setupDatabase, truncateDatabase } from "../../../infraestructure/database/setup";
 import Restaurant from "../../../domain/models/restaurant";
 import Hour from "../../../domain/models/hour";
 
@@ -9,8 +9,10 @@ describe('Get Restaurants Use Case', () => {
   const databaseRestaurantRepository = new DatabaseRestaurantRepository();
   const getRestaurants = new GetRestaurants(databaseRestaurantRepository);
 
-  beforeAll(async () => {
+  beforeEach(async () => {
     await setupDatabase();
+
+    await truncateDatabase();
     
     await databaseRestaurantRepository.create(Restaurant.create({
       id: '1',

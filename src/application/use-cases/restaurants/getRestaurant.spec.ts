@@ -1,6 +1,6 @@
 import { describe } from "node:test";
-import { beforeAll, expect, it } from "vitest";
-import { setupDatabase } from "../../../infraestructure/database/setup";
+import { beforeEach, expect, it } from "vitest";
+import { setupDatabase, truncateDatabase } from "../../../infraestructure/database/setup";
 import { DatabaseRestaurantRepository } from "../../../domain/repositories/restaurantRepository/databaseRestaurantRepository";
 import Restaurant from "../../../domain/models/restaurant";
 import GetRestaurant from "./getRestaurant";
@@ -27,8 +27,10 @@ describe('Get Restaurant Use Case', () => {
     ]
   });
 
-  beforeAll(async () => {
+  beforeEach(async () => {
     await setupDatabase();
+
+    await truncateDatabase();
     
     await databaseRestaurantRepository.create(restaurantData);
   });

@@ -1,6 +1,6 @@
 import { DatabaseRestaurantRepository } from "../../../domain/repositories/restaurantRepository/databaseRestaurantRepository";
 import { DatabaseProductRepository } from "../../../domain/repositories/productRepository/databaseProductRepository";
-import { setupDatabase } from "../../../infraestructure/database/setup";
+import { setupDatabase, truncateDatabase } from "../../../infraestructure/database/setup";
 import CreateRestaurant from "../restaurants/createRestaurant";
 import Restaurant from "../../../domain/models/restaurant";
 import { Product } from "../../../domain/models/product";
@@ -32,6 +32,8 @@ describe('Get Products Use Case', () => {
 
   beforeEach(async () => {
     await setupDatabase();
+
+    await truncateDatabase();
 
     await createRestaurant.execute(Restaurant.create(restaurantData));
     await createProduct.execute(Product.create(productData));

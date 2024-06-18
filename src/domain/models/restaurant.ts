@@ -1,5 +1,6 @@
 import { ValidationError } from "../errors/validation-error";
 import Hour from "./hour";
+import { env } from '../../infraestructure/config/env'
 
 interface Input {
   id?: string;
@@ -12,7 +13,7 @@ interface Input {
   }[];
 }
 
-const localUrl = 'http://localhost:3000';
+const localUrl = `http://localhost:${env.PORT}`;
 
 export default class Restaurant {
   constructor(

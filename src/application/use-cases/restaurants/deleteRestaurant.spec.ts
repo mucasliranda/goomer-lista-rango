@@ -1,9 +1,9 @@
 import { describe } from "node:test";
-import { beforeAll, beforeEach, expect, it } from "vitest";
+import { beforeEach, expect, it } from "vitest";
 import Hour from "../../../domain/models/hour";
 import CreateRestaurant from "./createRestaurant";
 import { DatabaseRestaurantRepository } from "../../../domain/repositories/restaurantRepository/databaseRestaurantRepository";
-import { setupDatabase } from "../../../infraestructure/database/setup";
+import { setupDatabase, truncateDatabase } from "../../../infraestructure/database/setup";
 import Restaurant from "../../../domain/models/restaurant";
 import GetRestaurant from "./getRestaurant";
 import GetRestaurants from "./getRestaurants";
@@ -49,6 +49,8 @@ describe('Delete Restaurant Use Case', () => {
 
   beforeEach(async () => {
     await setupDatabase();
+
+    await truncateDatabase();
 
     await createRestaurant.execute(Restaurant.create(restaurantData));
 
