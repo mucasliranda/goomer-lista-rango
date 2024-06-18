@@ -5,6 +5,7 @@
   "main": "src/infraestructure/web/server.ts",
   "type": "module",
   "scripts": {
+    "start": "tsx src/infraestructure/web/server.ts",
     "dev": "tsx watch src/infraestructure/web/server.ts",
     "test": "set NODE_ENV=test && vitest",
     "test:coverage": "set NODE_ENV=test && vitest --coverage"
