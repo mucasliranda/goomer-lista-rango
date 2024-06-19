@@ -1,13 +1,12 @@
+import 'express-async-errors';
 import restaurantsRouter from '../../interfaces/controllers/restaurants';
 import productsRouter from '../../interfaces/controllers/products';
 import salesRouter from '../../interfaces/controllers/sales';
 import imageRouter from '../../interfaces/controllers/image';
 import { setupDatabase } from '../database/setup';
 import bodyParser from 'body-parser';
+import { env } from '../config/env';
 import express from 'express';
-import dotenv from 'dotenv';
-
-dotenv.config();
 
 const app = express();
 
@@ -33,7 +32,7 @@ app.use((err: any, req: express.Request, res: express.Response, next: express.Ne
   });
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = env.PORT || 3000;
 
 setupDatabase().then(() => {
   app.listen(PORT, () => {
